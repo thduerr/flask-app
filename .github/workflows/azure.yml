@@ -1,12 +1,18 @@
-- name: Sign in to Azure 
-- uses: azure/login@v1
-  with:
-    creds: ${{ secrets.AZURE_CREDENTIALS }}
-- name: Deploy to Azure Web App
-- uses: azure/webapps-deploy@v2
-  with:
-    app-name: 'thduerr-cms-app'
-    package: .
-- name: Sign out of Azure
-  run: |
-    az logout
+on: push
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Sign in to Azure 
+    - uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+    - name: Deploy to Azure Web App
+    - uses: azure/webapps-deploy@v2
+      with:
+        app-name: 'thduerr-cms-app'
+        package: .
+    - name: Sign out of Azure
+      run: |
+        az logout
